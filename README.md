@@ -5,7 +5,7 @@
 
 Device Plugins for [[thing-it-node]](https://github.com/marcgille/thing-it-node) and [thing-it.com](wwww.thing-it.com) for ZigBee devices connected to the ubisys (http://www.ubisys.com/) platform.
 
-<a href="./documentation/images/g1.png"><img src="./documentation/images/g1.png" width="80%" height="80%"></a>
+<a href="./documentation/images/g1.png"><img src="./documentation/images/g1.png" width="50%" height="50%"></a>
 
 ## Installation and Configuration
 
@@ -26,8 +26,8 @@ The **[thing-it-device-ubisys]** Plugin is installed with **[thing-it-node]**, h
 The Plugin supports Autodiscovery, hence you only have to create a directory in which you intend to run the configuration, e.g.
  
 ```
-mkdir ~/plugwise-test
-cd ~/plugwise-test
+mkdir ~/ubisys-test
+cd ~/ubisys-test
 ```
 
 and invoke
