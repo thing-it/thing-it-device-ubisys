@@ -24,6 +24,12 @@ module.exports = {
                     id: "integer"
                 },
                 defaultValue: 55555
+            }, {
+                label: "ZigBee Network",
+                id: "zigBeeNetwork",
+                type: {
+                    id: "string"
+                }
             }
         ]
     },
