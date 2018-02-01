@@ -44,16 +44,17 @@ function MotionSensor() {
     MotionSensor.prototype.start = function () {
         var deferred = q.defer();
 
-        this.state = {motion: false, ticks: 0};
+        this.state = {occupied: false, ticksPerMinute: 0};
 
         if (this.isSimulated()) {
             this.interval = setInterval(function () {
-                this.state.motion = !this.state.motion;
+                this.state.occupied = !this.state.occupied;
 
-                if (this.state.motion) {
-                    this.state.ticks = Math.round(Math.random() * 10);
+                if (this.state.occupied) {
+                    this.state.ticksPerMinute = Math.round(Math.random() * 10);
+                    this.state.lastMotionTimestamp = moment().toISOString();
                 } else {
-                    this.state.ticks = 0;
+                    this.state.ticksPerMinute = 0;
                 }
 
                 this.publishStateChange();
