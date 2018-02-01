@@ -5,7 +5,7 @@ module.exports = {
         role: "actor",
         family: "switch",
         deviceTypes: ["ubisys/gateway"],
-        services: [],
+        services: [{label: "Toggle", id: "toggle"}],
         state: [{
             label: "Switch",
             id: "switch",
@@ -48,15 +48,11 @@ function Switch() {
 
         if (this.isSimulated()) {
             this.interval = setInterval(function () {
-                this.state.switch = !this.state.switch;
+                if (this.state.switch) {
+                    this.state.power += 0.1;
 
-                this.publishStateChange();
-            }.bind(this), 20000);
-
-            this.powerInterval = setInterval(function () {
-                this.state.power += 0.1;
-
-                this.publishStateChange();
+                    this.publishStateChange();
+                }
             }.bind(this), 10000);
 
             deferred.resolve();
@@ -93,10 +89,6 @@ function Switch() {
         if (this.isSimulated()) {
             if (this.interval) {
                 clearInterval(this.interval);
-            }
-
-            if (this.powerInterval) {
-                clearInterval(this.powerInterval);
             }
         }
     }

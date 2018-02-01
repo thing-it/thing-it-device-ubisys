@@ -7,16 +7,22 @@ module.exports = {
         deviceTypes: ["ubisys/gateway"],
         services: [],
         state: [{
-            label: "Motion",
-            id: "motion",
+            label: "Occupied",
+            id: "occupied",
             type: {
                 id: "boolean"
             }
         }, {
-            label: "Ticks",
-            id: "ticks",
+            label: "Ticks/Minute",
+            id: "ticksPerMinute",
             type: {
                 id: "integer"
+            }
+        }, {
+            label: "Last Motion Timestamp",
+            id: "lastMotionTimestamp",
+            type: {
+                id: "string"
             }
         }],
         configuration: [{

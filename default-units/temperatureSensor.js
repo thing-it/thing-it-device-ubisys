@@ -41,7 +41,7 @@ function TemperatureSensor() {
 
         this.state = {temperature: 20.0};
 
-        if (!this.isSimulated()) {
+        if (this.isSimulated()) {
             this.interval = setInterval(function () {
                 this.state.temperature = Math.round(15 + Math.random() * 10);
 
