@@ -85,6 +85,13 @@ function Outlet() {
     /**
      *
      */
+    Outlet.prototype.toggle = function () {
+        this.state.switch = !this.state.switch;
+    };
+
+    /**
+     *
+     */
     Outlet.prototype.stop = function () {
         if (this.isSimulated()) {
             if (this.interval) {

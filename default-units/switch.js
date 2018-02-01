@@ -82,6 +82,10 @@ function Switch() {
         this.state = state;
     };
 
+    Switch.prototype.toggle = function () {
+        this.state.switch = !this.state.switch;
+    };
+
     /**
      *
      */
