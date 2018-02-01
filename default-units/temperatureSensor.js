@@ -2,7 +2,7 @@ module.exports = {
     metadata: {
         plugin: "temperatureSensor",
         label: "ubisys Temperature Sensor",
-        role: "actor",
+        role: "sensor",
         family: "temperatureSensor",
         deviceTypes: ["ubisys/gateway"],
         services: [],
@@ -56,6 +56,21 @@ function TemperatureSensor() {
 
         return deferred.promise;
     };
+
+    /**
+     *
+     */
+    TemperatureSensor.prototype.getState = function () {
+        return this.state;
+    };
+
+    /**
+     *
+     */
+    TemperatureSensor.prototype.setState = function (state) {
+        this.state = state;
+    };
+
 
     /**
      *

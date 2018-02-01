@@ -4,9 +4,13 @@ describe('[thing-it] ubisys Plugin', function () {
     var testDriver;
 
     before(function () {
-        testDriver = require("thing-it-test").createTestDriver({logLevel: "error", simulated: false});
+        testDriver = require("thing-it-test").createTestDriver({logLevel: "debug", simulated: true});
 
-        testDriver.registerDevicePlugin(__dirname + "/../switch");
+        testDriver.registerDevicePlugin('ubisys', __dirname + "/../gateway");
+        testDriver.registerUnitPlugin(__dirname + "/../default-units/motionSensor");
+        testDriver.registerUnitPlugin(__dirname + "/../default-units/outlet");
+        testDriver.registerUnitPlugin(__dirname + "/../default-units/switch");
+        testDriver.registerUnitPlugin(__dirname + "/../default-units/temperatureSensor");
     });
     describe('Start Configuration', function () {
         this.timeout(5000);
@@ -18,15 +22,16 @@ describe('[thing-it] ubisys Plugin', function () {
             });
         });
     });
-    describe('Switch Discovery', function () {
-        this.timeout(20000);
+    describe('Actor and Sensor Events', function () {
+        this.timeout(30000);
 
         before(function () {
             testDriver.removeAllListeners();
         });
-        it('should produce Device Discovery message', function (done) {
+        it('should receive state change messages', function (done) {
             testDriver.addListener({
-                publishDeviceRegistration: function (device) {
+                publishActorStateChange: function (event) {
+                    console.log('Event received >>>', event);
                     done();
                 }
             });

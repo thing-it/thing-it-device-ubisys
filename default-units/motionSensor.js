@@ -2,7 +2,7 @@ module.exports = {
     metadata: {
         plugin: "motionSensor",
         label: "ubisys PIR Sensor",
-        role: "actor",
+        role: "sensor",
         family: "motionSensor",
         deviceTypes: ["ubisys/gateway"],
         services: [],
@@ -66,6 +66,20 @@ function MotionSensor() {
         }
 
         return deferred.promise;
+    };
+
+    /**
+     *
+     */
+    MotionSensor.prototype.getState = function () {
+        return this.state;
+    };
+
+    /**
+     *
+     */
+    MotionSensor.prototype.setState = function (state) {
+        this.state = state;
     };
 
     /**

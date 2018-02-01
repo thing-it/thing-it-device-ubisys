@@ -71,6 +71,20 @@ function Outlet() {
     /**
      *
      */
+    Outlet.prototype.getState = function () {
+        return this.state;
+    };
+
+    /**
+     *
+     */
+    Outlet.prototype.setState = function (state) {
+        this.state = state;
+    };
+
+    /**
+     *
+     */
     Outlet.prototype.stop = function () {
         if (this.isSimulated()) {
             if (this.interval) {

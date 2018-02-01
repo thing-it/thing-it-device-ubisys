@@ -1,6 +1,6 @@
 {
   "name": "thing-it-device-ubisys",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "[thing-it-node] Device Plugin for ubisys © products.",
   "authors": "Marc Gille",
   "license": "MIT, EPL",
@@ -17,6 +17,9 @@
     "url": "https://github.com/thing-it/thing-it-device-ubisys"
   },
   "dependencies": {
-    "q": "^1.4.1"
+    "q": "^1.5.1"
+  },
+  "devDependencies": {
+    "thing-it-test": "0.0.20"
   }
 }

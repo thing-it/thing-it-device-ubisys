@@ -71,6 +71,20 @@ function Switch() {
     /**
      *
      */
+    Switch.prototype.getState = function () {
+        return this.state;
+    };
+
+    /**
+     *
+     */
+    Switch.prototype.setState = function (state) {
+        this.state = state;
+    };
+
+    /**
+     *
+     */
     Switch.prototype.stop = function () {
         if (this.isSimulated()) {
             if (this.interval) {
