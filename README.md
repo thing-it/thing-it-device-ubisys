@@ -58,7 +58,7 @@ you will be able monitor and control these from the **[thing-it] Mobile App** im
 
 The following screenshot shows the Node Page of the [sample configuration]("./examples.configuration"):
 
-<a href="./documentation/images/mobile-ui.png"><img src="./documentation/images/mobile-ui.png" width="80%" height="80%"></a>
+<a href="./documentation/images/mobile-ui.png"><img src="./documentation/images/mobile-ui.png" width="50%" height="50%"></a>
 
 ## Where to go from here ...
 
