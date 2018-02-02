@@ -18,7 +18,8 @@ module.exports = {
             id: "zigBeeId",
             type: {
                 id: "integer"
-            }
+            },
+            defaultValue: 55555
         }]
     },
     create: function () {
@@ -28,6 +29,7 @@ module.exports = {
 
 
 var q = require('q');
+var moment = require('moment');
 
 /**
  *
