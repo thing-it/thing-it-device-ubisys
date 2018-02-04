@@ -60,6 +60,16 @@ function Outlet() {
             deferred.resolve();
         }
         else {
+            // Retrieve current state
+
+            this.device.adapter.getNodeState(this.configuration.zigBeeId).then(state => {
+                this.state = state;
+
+                this.publishStateChange();
+            }).fail(error => {
+                this.logError(error);
+            });
+
             deferred.resolve();
         }
 
@@ -84,7 +94,13 @@ function Outlet() {
      *
      */
     Outlet.prototype.toggle = function () {
-        this.state.switch = !this.state.switch;
+        if (this.isSimulated()) {
+            this.state.switch = !this.state.switch;
+        } else {
+            this.device.adapter.invokeNodeService(this.configuration.zigBeeId, 'toggle()').then(() => {
+                this.state.switch = !this.state.switch;
+            }).fail();
+        }
     };
 
     /**

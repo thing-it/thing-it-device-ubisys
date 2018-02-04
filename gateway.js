@@ -11,8 +11,8 @@ module.exports = {
         services: [],
         configuration: [
             {
-                label: "IP Address",
-                id: "ipAddress",
+                label: "Host",
+                id: "host",
                 type: {
                     id: "string"
                 },
@@ -89,6 +89,10 @@ function Gateway() {
 
             deferred.resolve();
         } else {
+            this.adapter = new Adapter().initialize(this.configuration.host, this.configuration.port);
+
+            this.logDebug('Adapter initialized.');
+
             deferred.resolve();
         }
 
@@ -122,6 +126,79 @@ function Gateway() {
      *
      */
     Gateway.prototype.setState = function () {
+    };
+}
+
+function Adapter() {
+    Adapter.prototype.initialize = function (host, port) {
+        if (!this.request) {
+            this.request = require('request-json');
+        }
+
+        this.client = this.request.createClient('http://' + host + ':' + port + '/');
+
+        // Initialize Websocket
+
+        this.listeners = [];
+
+        const WebSocket = require('ws');
+
+        this.ws = new WebSocket('ws://' + host + ':' + port + '/events');
+
+        this.ws.on('open', () => {
+            console.log('>>> Connection to g1 opened');
+        });
+
+        this.ws.on('message', data => {
+            for (const listener of this.listeners) {
+                listener(data);
+            }
+        });
+
+        return this;
+    }
+
+    /**
+     *
+     */
+    Adapter.prototype.getNodeState = function (nodeId) {
+        var deferred = q.defer();
+
+        this.client.get('nodes/' + nodeId, function (err, res, body) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(body);
+            }
+        });
+
+        return deferred.promise;
+    };
+
+    /**
+     *
+     */
+    Adapter.prototype.invokeNodeService = function (nodeId, serviceId) {
+        var deferred = q.defer();
+
+        this.client.post('nodes/' + nodeId + '/services/' + serviceId, function (err, res, body) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                console.log(body);
+
+                deferred.resolve();
+            }
+        });
+
+        return deferred.promise;
+    };
+
+    /**
+     *
+     */
+    Adapter.prototype.registerListener = function (callback) {
+        this.listeners.push(callback);
     };
 }
 

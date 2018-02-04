@@ -49,12 +49,28 @@ function TemperatureSensor() {
 
                 this.publishStateChange();
             }.bind(this), 20000);
-
-            deferred.resolve();
         }
         else {
-            deferred.resolve();
+            // Retrieve current state
+
+            this.device.adapter.getNodeState(this.configuration.zigBeeId).then(state => {
+                this.state = state;
+
+                this.publishStateChange();
+            }).fail(error => {
+                this.logError(error);
+            });
+
+            this.device.adapter.registerListener((message) => {
+                if (message.type === 'stateChange' && message.node === this.configuration.zigBeeId) {
+                    this.state = message.state;
+
+                    this.publishStateChange();
+                }
+            });
         }
+
+        deferred.resolve();
 
         return deferred.promise;
     };

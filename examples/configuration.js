@@ -6,7 +6,7 @@ module.exports = {
         label: "Gateway",
         id: "gateway",
         plugin: "ubisys/gateway",
-        configuration: {ipAddress: "192.168.192.1", port: 5555},
+        configuration: {host: "localhost", port: 3335},
         actors: [{
             "class": "Actor",
             "id": "outlet1",
@@ -14,7 +14,7 @@ module.exports = {
             "type": "outlet",
             "logLevel": "debug",
             "configuration": {
-                "simulated": true,
+                "simulated": false,
                 "zigBeeId": "1"
             }
         }, {
@@ -35,7 +35,7 @@ module.exports = {
             "type": "motionSensor",
             "logLevel": "debug",
             "configuration": {
-                "simulated": true,
+                "simulated": false,
                 "zigBeeId": "3"
             }
         }, {
@@ -45,7 +45,7 @@ module.exports = {
             "type": "temperatureSensor",
             "logLevel": "debug",
             "configuration": {
-                "simulated": true,
+                "simulated": false,
                 "zigBeeId": "4"
             }
         }],

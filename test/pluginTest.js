@@ -4,7 +4,7 @@ describe('[thing-it] ubisys Plugin', function () {
     var testDriver;
 
     before(function () {
-        testDriver = require("thing-it-test").createTestDriver({logLevel: "debug", simulated: true});
+        testDriver = require("thing-it-test").createTestDriver({logLevel: "debug", simulated: false});
 
         testDriver.registerDevicePlugin('ubisys', __dirname + "/../gateway");
         testDriver.registerUnitPlugin(__dirname + "/../default-units/motionSensor");
