@@ -14,7 +14,6 @@ module.exports = {
             "type": "outlet",
             "logLevel": "debug",
             "configuration": {
-                "simulated": false,
                 "zigBeeId": "1"
             }
         }, {
@@ -24,7 +23,6 @@ module.exports = {
          "type": "switch",
          "logLevel": "debug",
          "configuration": {
-         "simulated": true,
          "zigBeeId": "2"
          }
          }],
@@ -35,7 +33,6 @@ module.exports = {
             "type": "motionSensor",
             "logLevel": "debug",
             "configuration": {
-                "simulated": false,
                 "zigBeeId": "3"
             }
         }, {
@@ -45,7 +42,6 @@ module.exports = {
             "type": "temperatureSensor",
             "logLevel": "debug",
             "configuration": {
-                "simulated": false,
                 "zigBeeId": "4"
             }
         }],

@@ -30,11 +30,48 @@ describe('[thing-it] ubisys Plugin', function () {
         });
         it('should receive state change messages', function (done) {
             testDriver.addListener({
-                publishActorStateChange: function (event) {
-                    console.log('Event received >>>', event);
-                    done();
+                publishSensorStateChange: function (deviceId, sensorId, state) {
+                    if (sensorId === 'motionSensor1') {
+                        done();
+                    }
                 }
             });
+        });
+    });
+    describe('Actor Services', function () {
+        this.timeout(5000);
+
+        before(function () {
+            testDriver.removeAllListeners();
+        });
+        it('should receive state change messages', function (done) {
+            testDriver.addListener({
+                publishActorStateChange: function (deviceId, actorId, state) {
+                    if (sensorId === 'outlet1') {
+                        done();
+                    }
+                }
+            });
+
+            testDriver.devices[0].findActor('outlet1').toggle();
+        });
+    });
+    describe('Actor Services', function () {
+        this.timeout(5000);
+
+        before(function () {
+            testDriver.removeAllListeners();
+        });
+        it('should receive state change messages', function (done) {
+            testDriver.addListener({
+                publishActorStateChange: function (deviceId, actorId, state) {
+                    if (sensorId === 'switch1') {
+                        done();
+                    }
+                }
+            });
+
+            testDriver.devices[0].findActor('switch1').toggle();
         });
     });
 });

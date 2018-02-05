@@ -93,9 +93,13 @@ function Switch() {
     Switch.prototype.toggle = function () {
         if (this.isSimulated()) {
             this.state.switch = !this.state.switch;
+
+            this.publishStateChange();
         } else {
-            this.device.adapter.invokeNodeService(this.configuration.zigBeeId, 'toggle()').then(() => {
+            this.device.adapter.invokeNodeService(this.configuration.zigBeeId, 'toggle').then(() => {
                 this.state.switch = !this.state.switch;
+
+                this.publishStateChange();
             }).fail();
         }
     };
