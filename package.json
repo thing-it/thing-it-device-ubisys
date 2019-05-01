@@ -1,5 +1,5 @@
 {
-  "name": "thing-it-device-ubisys",
+  "name": "@thing-it/device-ubisys",
   "version": "0.0.13",
   "description": "[thing-it-node] Device Plugin for ubisys © products.",
   "authors": "Marc Gille",
@@ -15,6 +15,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/thing-it/thing-it-device-ubisys"
+  },
+  "scripts": {
+    "postversion": "git push && git push --tags && npm publish"
   },
   "dependencies": {
     "express-ws": "^3.0.0",
