@@ -1,6 +1,6 @@
 {
   "name": "@thing-it/device-ubisys",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "[thing-it-node] Device Plugin for ubisys © products.",
   "authors": "Marc Gille",
   "license": "MIT, EPL",
