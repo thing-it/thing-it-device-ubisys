@@ -41,6 +41,12 @@ function TemperatureSensor() {
     TemperatureSensor.prototype.start = function () {
         var deferred = q.defer();
 
+        this.operationalState = {
+            status: 'PENDING',
+            message: 'Waiting for initialization...'
+        };
+        this.publishOperationalStateChange();
+
         this.state = {temperature: 20.0};
 
         if (this.isSimulated()) {
@@ -49,6 +55,12 @@ function TemperatureSensor() {
 
                 this.publishStateChange();
             }.bind(this), 20000);
+
+            this.operationalState = {
+                status: 'OK',
+                message: 'Temperature Sensor successfully initialized'
+            }
+            this.publishOperationalStateChange();
         }
         else {
             // Retrieve current state
@@ -56,8 +68,20 @@ function TemperatureSensor() {
             this.device.adapter.getNodeState(this.configuration.zigBeeId).then(state => {
                 this.state = state;
 
+                this.operationalState = {
+                    status: 'OK',
+                    message: 'Temperature Sensor successfully initialized'
+                }
+                this.publishOperationalStateChange();
+
                 this.publishStateChange();
             }).fail(error => {
+                this.operationalState = {
+                    status: 'ERROR',
+                    message: 'Temperature Sensor initialization error'
+                }
+                this.publishOperationalStateChange();
+
                 this.logError(error);
             });
 

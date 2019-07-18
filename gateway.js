@@ -83,9 +83,21 @@ function Gateway() {
      */
     Gateway.prototype.start = function () {
         var deferred = q.defer();
+        
+        this.operationalState = {
+            status: 'PENDING',
+            message: 'Waiting for initialization...'
+        };
+        this.publishOperationalStateChange();
 
         if (this.isSimulated()) {
             this.logDebug("Starting ubisys G1 in simulated mode.");
+
+            this.operationalState = {
+                status: 'OK',
+                message: 'G1 — ZigBee/Ethernet Gateway successfully initialized'
+            }
+            this.publishOperationalStateChange();
 
             deferred.resolve();
         } else {
@@ -93,6 +105,12 @@ function Gateway() {
 
             this.logDebug('Adapter initialized.');
 
+            this.operationalState = {
+                status: 'OK',
+                message: 'G1 — ZigBee/Ethernet Gateway successfully initialized'
+            }
+            this.publishOperationalStateChange();
+                        
             deferred.resolve();
         }
 

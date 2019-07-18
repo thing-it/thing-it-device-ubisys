@@ -52,6 +52,12 @@ function MotionSensor() {
     MotionSensor.prototype.start = function () {
         var deferred = q.defer();
 
+        this.operationalState = {
+            status: 'PENDING',
+            message: 'Waiting for initialization...'
+        };
+        this.publishOperationalStateChange();
+
         this.state = {occupied: false, ticksPerMinute: 0};
 
         if (this.isSimulated()) {
@@ -68,6 +74,12 @@ function MotionSensor() {
                 this.publishStateChange();
             }.bind(this), 20000);
 
+            this.operationalState = {
+                status: 'OK',
+                message: 'PIR Sensor successfully initialized'
+            }
+            this.publishOperationalStateChange();            
+
             deferred.resolve();
         }
         else {
@@ -76,8 +88,20 @@ function MotionSensor() {
             this.device.adapter.getNodeState(this.configuration.zigBeeId).then(state => {
                 this.state = state;
 
+                this.operationalState = {
+                    status: 'OK',
+                    message: 'PIR Sensor successfully initialized'
+                }
+                this.publishOperationalStateChange(); 
+
                 this.publishStateChange();
             }).fail(error => {
+                this.operationalState = {
+                    status: 'ERROR',
+                    message: 'PIR Sensor initialization error'
+                }
+                this.publishOperationalStateChange(); 
+
                 this.logError(error);
             });
 

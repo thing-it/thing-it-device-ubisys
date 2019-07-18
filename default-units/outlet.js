@@ -46,6 +46,12 @@ function Outlet() {
     Outlet.prototype.start = function () {
         var deferred = q.defer();
 
+        this.operationalState = {
+            status: 'PENDING',
+            message: 'Waiting for initialization...'
+        };
+        this.publishOperationalStateChange();
+
         this.state = {switch: false, power: 0};
 
         if (this.isSimulated()) {
@@ -57,6 +63,12 @@ function Outlet() {
                 }
             }.bind(this), 10000);
 
+            this.operationalState = {
+                status: 'OK',
+                message: 'Smart Power Outlet successfully initialized'
+            }
+            this.publishOperationalStateChange(); 
+
             deferred.resolve();
         }
         else {
@@ -65,8 +77,20 @@ function Outlet() {
             this.device.adapter.getNodeState(this.configuration.zigBeeId).then(state => {
                 this.state = state;
 
+                this.operationalState = {
+                    status: 'OK',
+                    message: 'Smart Power Outlet successfully initialized'
+                }
+                this.publishOperationalStateChange();
+
                 this.publishStateChange();
             }).fail(error => {
+                this.operationalState = {
+                    status: 'ERROR',
+                    message: 'Smart Power Outlet initialization error'
+                }
+                this.publishOperationalStateChange(); 
+
                 this.logError(error);
             });
 
