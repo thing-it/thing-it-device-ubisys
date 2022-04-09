@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "express-ws": "^3.0.0",
-    "moment": "^2.20.1",
+    "moment": "^2.29.2",
     "q": "^1.5.1",
     "request-json": "^0.6.2",
     "ws": "^4.0.0"
